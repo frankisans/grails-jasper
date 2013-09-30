@@ -1,0 +1,14 @@
+# Grails
+target/
+*.log
+/plugin.xml
+/*.zip
+/web-app/
+
+# IntelliJ IDEA
+/.idea
+/out
+*.iml
+
+# OSX
+.DS_Store
