@@ -6,7 +6,7 @@ target/
 /web-app/
 
 # IntelliJ IDEA
-#/.idea
+/.idea
 /out
 *.iml
 
