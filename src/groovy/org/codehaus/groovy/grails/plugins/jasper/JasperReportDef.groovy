@@ -33,114 +33,125 @@ import net.sf.jasperreports.engine.JasperPrint
  * data(reportData and/or parameters) needed to fill the report.
  * @author Sebastian Hohns 2010
  */
-public class JasperReportDef implements Serializable{
+public class JasperReportDef implements Serializable {
 
-  /**
-   * The name of the report file without extension.
-   * <p>
-   * The file can be in jrxml- or jasper-format.
-   */
-  String name
+    /**
+     * The name of the report file without extension.
+     * <p>
+     * The file can be in jrxml- or jasper-format.
+     */
+    String name
 
-  /**
-   * The parent folder of the report file.
-   * <p>
-   * This can be an absolute path or an relative path based on class path.
-   */
-  String folder
+    /**
+     * The parent folder of the report file.
+     * <p>
+     * This can be an absolute path or an relative path based on class path.
+     */
+    String folder
 
-  /**
-   * The data source used to fill the report.
-   * <p>
-   * This is a list of java beans.
-   */
-  Collection reportData
+    /**
+     * The data source used to fill the report.
+     * <p>
+     * This is a list of java beans.
+     */
+    Collection reportData
 
-  /**
-   * The target file format.
-   */
-  public JasperExportFormat fileFormat = JasperExportFormat.PDF_FORMAT;
+    /**
+     * The SQL connection used to fill the report.
+     */
+    java.sql.Connection reportConnection
 
-  /**
-   * The generated report as OutputStream.
-   */
-  ByteArrayOutputStream contentStream
+    /**
+     * If true closes the connection passed in reportConnection
+     * By default leaves the passed connection opened
+     */
+    boolean closeConnection = false
 
-  /**
-   * Additional parameters.
-   */
-  Map parameters = new HashMap()
+    /**
+     * The target file format.
+     */
+    public JasperExportFormat fileFormat = JasperExportFormat.PDF_FORMAT;
 
-  /**
-   * Locale setting.
-   */
-  Locale locale
+    /**
+     * The generated report as OutputStream.
+     */
+    ByteArrayOutputStream contentStream
 
-  JasperPrint jasperPrinter
+    /**
+     * Additional parameters.
+     */
+    Map parameters = new HashMap()
 
-  private getApplicationContext() {
-    return ApplicationHolder.application.mainContext
-  }
+    /**
+     * Locale setting.
+     */
+    Locale locale
 
-  /**
-   * Looks for the report file in the filesystem. The file extension can either be .jasper
-   * or .jrxml. if japser.compile.files is set to true the report will be compiled and stored
-   * in the same folder as the jrxml file.
-   * @return the report as Resource
-   * @throws Exception , report file not found
-   */
-  public Resource getReport() throws Exception {
-    String path = getFilePath()
+    JasperPrint jasperPrinter
 
-    Resource result = getApplicationContext().getResource(path + ".jasper")
-    if (result.exists()) {
-      return result
+    private getApplicationContext() {
+        return ApplicationHolder.application.mainContext
     }
 
-    result = new FileSystemResource(path + ".jasper")
-    if (result.exists()) {
-      return result
+    /**
+     * Looks for the report file in the filesystem. The file extension can either be .jasper
+     * or .jrxml. if japser.compile.files is set to true the report will be compiled and stored
+     * in the same folder as the jrxml file.
+     * @return the report as Resource
+     * @throws Exception , report file not found
+     */
+    public Resource getReport() throws Exception {
+        String path = getFilePath()
+
+        Resource result = getApplicationContext().getResource(path + ".jasper")
+        if (result.exists()) {
+            return result
+        }
+
+        result = new FileSystemResource(path + ".jasper")
+        if (result.exists()) {
+            return result
+        }
+
+        result = getApplicationContext().getResource(path + ".jrxml")
+        if (result.exists()) {
+            return result
+        }
+
+        result = new FileSystemResource(path + ".jrxml")
+        if (result.exists()) {
+            return result
+        }
+
+        throw new Exception("No such report spec: ${path} (jasper or .jrxml)")
     }
 
-    result = getApplicationContext().getResource(path + ".jrxml")
-    if (result.exists()) {
-      return result
+    /**
+     * Return the file path. The filepath can be set per file (highest priority) or based on
+     * the jasper.dir.reports setting. Defaults to /report.
+     * @return full path to the report, without extension
+     */
+    public String getFilePath() {
+        if (folder) {
+            return folder + File.separator + FilenameUtils.getPath(name) + FilenameUtils.getBaseName(name)
+        } else if (ConfigurationHolder.config.jasper.dir.reports) {
+            return ConfigurationHolder.config.jasper.dir.reports + File.separator + FilenameUtils.getPath(name) + FilenameUtils.getBaseName(name)
+        } else {
+            return "/reports" + File.separator + FilenameUtils.getPath(name) + FilenameUtils.getBaseName(name)
+        }
     }
 
-    result = new FileSystemResource(path + ".jrxml")
-    if (result.exists()) {
-      return result
+    public void setFilePath(String path) {
+        folder = FilenameUtils.getPath(path)
+        name = FilenameUtils.getName(path)
     }
 
-    throw new Exception("No such report spec: ${path} (jasper or .jrxml)")
-  }
-
-  /**
-   * Return the file path. The filepath can be set per file (highest priority) or based on
-   * the jasper.dir.reports setting. Defaults to /report.
-   * @return full path to the report, without extension
-   */
-  public String getFilePath() {
-    if (folder) {
-      return folder + File.separator + FilenameUtils.getPath(name) + FilenameUtils.getBaseName(name)
-    } else if (ConfigurationHolder.config.jasper.dir.reports) {
-      return ConfigurationHolder.config.jasper.dir.reports + File.separator + FilenameUtils.getPath(name) + FilenameUtils.getBaseName(name)
-    } else {
-      return "/reports" + File.separator + FilenameUtils.getPath(name) + FilenameUtils.getBaseName(name)
+    /**
+     * Add a parameter to the parameter map.
+     * @param key , the key
+     * @param value , the value
+     */
+    public void addParameter(key, value) {
+        parameters.put(key, value)
     }
-  }
-
-  public void setFilePath(String path) {
-    folder = FilenameUtils.getPath(path)
-    name = FilenameUtils.getName(path)
-  }
-
-  /**
-   * Add a parameter to the parameter map.
-   * @param key , the key
-   * @param value , the value
-   */
-  public void addParameter(key, value) {
-    parameters.put(key, value)
-  }
 }
