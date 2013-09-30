@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a9f9e2f5-52c1-4670-bcac-60fb9eda5ed8" name="Default" comment="Add reportConnection">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+    <list default="true" id="a9f9e2f5-52c1-4670-bcac-60fb9eda5ed8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/org/codehaus/groovy/grails/plugins/jasper/JasperService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/org/codehaus/groovy/grails/plugins/jasper/JasperService.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugin.xml" afterPath="$PROJECT_DIR$/plugin.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/groovy/org/codehaus/groovy/grails/plugins/jasper/JasperReportDef.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/codehaus/groovy/grails/plugins/jasper/JasperReportDef.groovy" />
     </list>
     <ignored path="$USER_HOME$/.griffon/" />
     <ignored path="$USER_HOME$/.grails/" />
@@ -738,7 +734,23 @@
       <created>1380549312702</created>
       <updated>1380549312702</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="commit project files">
+      <created>1380549330146</created>
+      <updated>1380549330146</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Add zip plugin to the project">
+      <created>1380549524114</created>
+      <updated>1380549524114</updated>
+    </task>
+    <task id="LOCAL-00019" summary="commit project files&#10;">
+      <created>1380549548226</created>
+      <updated>1380549548226</updated>
+    </task>
+    <task id="LOCAL-00020" summary="commit project files&#10;">
+      <created>1380549575227</created>
+      <updated>1380549575227</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -818,7 +830,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Upgrade plugin version" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit project files&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -831,8 +843,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Remove unused icons" />
-    <MESSAGE value="Prepare update to jasperreport 3.7.5 and POI 3.6" />
     <MESSAGE value="Update to jasperreport 3.7.6" />
     <MESSAGE value="remove junk" />
     <MESSAGE value="remove junk." />
@@ -855,6 +865,9 @@
     <MESSAGE value="Add GIT ignore file" />
     <MESSAGE value="Upgrade to latest grails SDK 2.2x" />
     <MESSAGE value="Upgrade plugin version" />
+    <MESSAGE value="commit project files" />
+    <MESSAGE value="Add zip plugin to the project" />
+    <MESSAGE value="commit project files&#10;" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
